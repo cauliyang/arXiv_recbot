@@ -11,6 +11,9 @@ from preference_model import PreferenceModel
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CallbackQueryHandler
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define your keywords
 MAX_RESULTS = 100
