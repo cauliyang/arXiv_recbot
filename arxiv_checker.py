@@ -1,9 +1,5 @@
 import os
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
 import joblib
-import random
 import argparse
 
 import torch
@@ -49,7 +45,6 @@ async def fetch_and_send_papers(keywords, backdays, context: ContextTypes.DEFAUL
     now = datetime.utcnow()
     yesterday = now - timedelta(days=backdays)
 
-    num_sent = 0
 
     papers_to_send = []
 
@@ -131,8 +126,10 @@ def main():
 
     application.add_handler(CallbackQueryHandler(feedback_handler))
 
-    run_once_fetch_func = lambda context: fetch_and_send_papers(args.keywords, args.first_backcheck_day, context)
-    run_daily_fetch_func = lambda context: fetch_and_send_papers(args.keywords, 2, context)
+    def run_once_fetch_func(context):
+        return fetch_and_send_papers(args.keywords, args.first_backcheck_day, context)
+    def run_daily_fetch_func(context):
+        return fetch_and_send_papers(args.keywords, 2, context)
 
     if args.first_backcheck_day is not None:
         application.job_queue.run_once(run_once_fetch_func, when=timedelta(seconds=1))

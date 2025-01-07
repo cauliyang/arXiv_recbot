@@ -1,19 +1,21 @@
 import arxiv
 
+
 def get_arxiv_results(query, max_results):
     client = arxiv.Client()
     search = arxiv.Search(
-        query=query, 
-        max_results=max_results, 
+        query=query,
+        max_results=max_results,
         sort_by=arxiv.SortCriterion.SubmittedDate,
-        sort_order=arxiv.SortOrder.Descending
+        sort_order=arxiv.SortOrder.Descending,
     )
     results = client.results(search)
     return list(results)
 
+
 def get_arxiv_message(result):
-    summary = result.summary.replace('\n', ' ')
-    authors = ', '.join([author.name for author in result.authors]) 
+    summary = result.summary.replace("\n", " ")
+    authors = ", ".join([author.name for author in result.authors])
     message = (
         f"**Title:** {result.title}\n"
         f"**Authors:** {authors}\n"
@@ -21,4 +23,3 @@ def get_arxiv_message(result):
         f"**URL:** {result.entry_id}"
     )
     return message
-

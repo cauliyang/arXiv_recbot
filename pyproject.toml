@@ -1,0 +1,13 @@
+[project]
+name = "arxiv-recbot"
+version = "0.1.0"
+description = "A Telegram bot to recommend arXiv papers Resources"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "arxiv==2.0.0",
+    "python-telegram-bot==20.2",
+    "scikit-learn",
+    "pandas",
+    "torch",
+]
