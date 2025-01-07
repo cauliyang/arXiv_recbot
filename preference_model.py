@@ -18,6 +18,10 @@ from torch.utils.data import TensorDataset, DataLoader
 import joblib
 from arxiv_util import *
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Define the model
 class PreferenceModel(nn.Module):
